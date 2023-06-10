@@ -34,5 +34,10 @@ public class PoopCtrl : MonoBehaviour
             HPManager.hp -= 1;  
             Destroy(gameObject);
         }
+
+        if (other.tag == "Ground")
+        {  
+            Destroy(gameObject);
+        }
     }
 }

@@ -1995,7 +1995,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024100606}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.27, z: 2.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 919132148312777227}
-  xmove: 180
+  xmove: 0
   ymove: 23
   distance: 10
 --- !u!114 &1024100611
@@ -2451,7 +2451,7 @@ GameObject:
   - component: {fileID: 1144226374}
   - component: {fileID: 1144226376}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4236,7 +4236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6483587874259706811, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6483587874259706811, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4244,7 +4244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6483587874259706811, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6483587874259706811, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4256,16 +4256,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6483587874259706811, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6483587874259706811, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6806552444867188559, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
+    - target: {fileID: 6805200362899497440, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 100000, guid: 4c5a17ca1f9fec84e941441ebb8be079, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37201c2293e66ad458637cbec1be840d, type: 3}
 --- !u!1001 &8709772221062311025

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -17,5 +18,13 @@ public class ScoreText : MonoBehaviour
     void Update()
     {
         textScore.text = "Score : " + scoreValue;
+    }
+
+    void FixedUpdate()
+    {
+        if(ScoreText.scoreValue == 100)
+        {
+            SceneManager.LoadScene("wwwwwingus");
+        }
     }
 }

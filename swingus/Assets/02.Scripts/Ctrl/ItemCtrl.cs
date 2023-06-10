@@ -33,5 +33,10 @@ public class ItemCtrl : MonoBehaviour
             Debug.Log("Item");
             Destroy(gameObject);
         }
+
+        if (other.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }       
     }
 }

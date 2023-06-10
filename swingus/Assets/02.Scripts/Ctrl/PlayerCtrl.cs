@@ -4,42 +4,52 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public float speed = 10f;
-    public float jump = 10f;
+    public float speed = 10.0f;
+    public float rotateSpeed = 10.0f;
+    public float jump = 10.0f;
     bool isJumping = false;
 
+    float h, v;
+
+    public AudioSource poopSfx;
+    public AudioSource itemSfx;
+
     private Rigidbody rb;
+    private new AudioSource audio;
 
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+
+        Vector3 dir = new Vector3(h, 0, v); // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
+
+        // 바라보는 방향으로 회전 후 다시 정면을 바라보는 현상을 막기 위해 설정
+        if (!(h == 0 && v == 0))
         {
-            transform.Rotate(0, -speed *10* Time.deltaTime, 0);
+            // 이동과 회전을 함께 처리
+            transform.position += dir * speed * Time.deltaTime;
+            // 회전하는 부분. Point 1.
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
         }
-        if (Input.GetKey(KeyCode.D))
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Poop")
         {
-            transform.Rotate(0, speed *10* Time.deltaTime, 0);
+            poopSfx.Play();
         }
-        if (Input.GetKey(KeyCode.W))
+
+        if (other.tag == "Item")
         {
-            transform.Translate(0, 0, speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(0, 0, -speed * Time.deltaTime);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isJumping == false)
-            {
-                isJumping = true;
-                GetComponent<Rigidbody>().AddForce(Vector3.up * jump, ForceMode.Impulse);
-            }
+            itemSfx.Play();
         }
     }
     void OnCollisionEnter(Collision col)
@@ -48,5 +58,5 @@ public class PlayerCtrl : MonoBehaviour
         {
             isJumping = false;
         }
-    } 
+    }
 }
