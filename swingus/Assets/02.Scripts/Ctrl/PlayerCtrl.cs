@@ -7,12 +7,17 @@ public class PlayerCtrl : MonoBehaviour
     public float speed = 10.0f;
     public float rotateSpeed = 10.0f;
     public float jump = 10.0f;
+    public float boostDuration = 3.0f;
+    public float boostMultiplier = 2.0f;
     bool isJumping = false;
+    bool isBoosted = false;
+    private float originalSpeed;
 
     float h, v;
 
     public AudioSource poopSfx;
     public AudioSource itemSfx;
+    public AudioSource napzakSfx;
 
     private Rigidbody rb;
     private new AudioSource audio;
@@ -21,6 +26,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        originalSpeed = speed;
     }
 
     void FixedUpdate()
@@ -34,9 +40,22 @@ public class PlayerCtrl : MonoBehaviour
         if (!(h == 0 && v == 0))
         {
             // 이동과 회전을 함께 처리
-            transform.position += dir * speed * Time.deltaTime;
+            transform.position += dir * GetPlayerSpeed() * Time.deltaTime;
             // 회전하는 부분. Point 1.
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
+        }
+    }
+
+    private float GetPlayerSpeed()
+    {
+        if (isBoosted)
+        {
+            // 일시적으로 속도를 증가시킴
+            return speed * boostMultiplier;
+        }
+        else
+        {
+            return speed;
         }
     }
 
@@ -49,9 +68,29 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.tag == "Item")
         {
-            itemSfx.Play();
+            itemSfx.Play();   
+        }
+
+        if (other.tag == "Napzak")
+        {
+            napzakSfx.Play();
+            BoostPlayerSpeed();
         }
     }
+
+    private void BoostPlayerSpeed()
+    {
+        isBoosted = true;
+
+        // 속도를 원래 값으로 복원하기 위해 일정 시간 후에 isBoosted를 false로 변경
+        Invoke("ResetPlayerSpeed", boostDuration);
+    }
+
+    private void ResetPlayerSpeed()
+    {
+        isBoosted = false;
+    }
+
     void OnCollisionEnter(Collision col)
     {
         if (col.transform.name == "Ground")
